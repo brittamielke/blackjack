@@ -45,17 +45,12 @@ public class BlackjackGame {
 	}
 
 	public void determinePayout() {
-		// Player = blackjack AND dealer != blackjack
 		if (outcomeIsPlayerWinnerByBlackjack()) {
 			player.acceptPayoutFromGame(currentBet * 1.5);
 		}
-		// Player = blackjack AND dealer = blackjack
-		// OR player total == dealer total
 		if (outcomeIsTie()) {
 			player.acceptPayoutFromGame(currentBet);
 		}
-		// Player total <=21 and dealer is busted
-		// OR player total <=21 and dealer total <= player total
 		if (outcomeIsPlayerWinnerNotByBlackjack()) {
 			player.acceptPayoutFromGame(currentBet * 2);
 		}
@@ -66,10 +61,13 @@ public class BlackjackGame {
 	}
 
 	public boolean outcomeIsPlayerWinnerByBlackjack() {
+		// Player = blackjack AND dealer != blackjack
 		return (player.getPlayerHand().isBlackjack() && !house.getHouseHand().isBlackjack());
 	}
 
 	public boolean outcomeIsTie() {
+		// Player = blackjack AND dealer = blackjack
+		// OR player total == dealer total
 		return (player.getPlayerHand().isBlackjack() && house.getHouseHand().isBlackjack())
 				|| (player.getPlayerHand().getTotal() == house.getHouseHand().getTotal());
 	}

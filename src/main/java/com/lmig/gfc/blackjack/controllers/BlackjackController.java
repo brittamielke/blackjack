@@ -58,7 +58,7 @@ public class BlackjackController {
 		if (game.getDeck().getDeckSize() >= 1) {
 			game.hit();
 			if (game.isHandOver()) {
-				game.determinePayout();
+				// game.determinePayout();
 				mv.setViewName("redirect:/endOfHand");
 			} else {
 				mv.setViewName("redirect:/play");
@@ -99,9 +99,7 @@ public class BlackjackController {
 	@GetMapping("/over")
 	public ModelAndView gameOver() {
 		ModelAndView mv = new ModelAndView();
-
 		mv.setViewName("gameOver");
-
 		mv.addObject("TheGame", game);
 		return mv;
 	}
