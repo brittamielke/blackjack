@@ -18,6 +18,11 @@ public class BlackjackGame {
 		player.subtractFromBank(currentBet);
 	}
 
+	public void acceptDoubleDownBet() {
+		player.subtractFromBank(currentBet);
+		currentBet = currentBet * 2;
+	}
+
 	public void deal() {
 		player.createNewHand();
 		house.createNewHand();
@@ -108,6 +113,11 @@ public class BlackjackGame {
 
 	public Deck getDeck() {
 		return deck;
+	}
+
+	public boolean doubleDownAvailable() {
+		return (player.getPlayerHand().getCards().size() == 2 && !player.getPlayerHand().isBlackjack());
+
 	}
 
 }

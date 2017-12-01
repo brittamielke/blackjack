@@ -21,13 +21,17 @@
 		{{/TheGame.player.playerHand.cards}}
 		{{ TheGame.player.playerHand.getTotal }}
 	</div>
-	
+	<br>
+	{{#TheGame.doubleDownAvailable}}
+	<form action="/doubleDown" method="post">
+		<button>Double Down</button>
+	</form>
+	{{/TheGame.doubleDownAvailable}}
+	<br>
 	<form action="/hit" method="post">
 		<button>Hit Me!</button>
 	</form>
-
-	
-	
+	<br>
 	<form action="/stand" method="post">
 		<button>Stand</button>
 	</form>

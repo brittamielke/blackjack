@@ -80,13 +80,7 @@ public class BlackjackController {
 	@PostMapping("/stand")
 	public ModelAndView stand() {
 		ModelAndView mv = new ModelAndView();
-		if (game.getDeck().getDeckSize() >= 1) {
-			game.houseDraw();
-			game.determinePayout();
-			mv.setViewName("endOfHand");
-		} else {
-			mv.setViewName("redirect:/over");
-		}
+		handStand(mv);
 		mv.addObject("TheGame", game);
 		return mv;
 	}
@@ -106,5 +100,27 @@ public class BlackjackController {
 		initGame();
 		mv.addObject("TheGame", game);
 		return mv;
+	}
+
+	@PostMapping("/doubleDown")
+	public ModelAndView doubleDown() {
+		ModelAndView mv = new ModelAndView();
+		game.acceptDoubleDownBet();
+		game.hit();
+		handStand(mv);
+		mv.addObject("TheGame", game);
+
+		return mv;
+
+	}
+
+	private void handStand(ModelAndView mv) {
+		if (game.getDeck().getDeckSize() >= 1) {
+			game.houseDraw();
+			game.determinePayout();
+			mv.setViewName("endOfHand");
+		} else {
+			mv.setViewName("redirect:/over");
+		}
 	}
 }
