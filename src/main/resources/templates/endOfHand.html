@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Blackjack Play</title>
+</head>
+<body>
+	<br> The current bet is: ${{ TheGame.getCurrentBet }}
+	<br> Your current bank balance is: ${{ TheGame.player.getBankTotal
+	}}
+
+	<div>
+		<h2>House hand</h2>
+		{{#TheGame.house.houseHand.cards}}
+		<p>{{ rank }} of {{ suit }}</p>
+		{{/TheGame.house.houseHand.cards}}
+		{{ TheGame.house.houseHand.getTotal }}
+	</div>
+	<div>
+		<h2>Player 1's hand</h2>
+		{{#TheGame.player.playerHand.cards}}
+		<p>{{ rank }} of {{ suit }}</p>
+		{{/TheGame.player.playerHand.cards}}
+		{{ TheGame.player.playerHand.getTotal }}
+	</div>
+	 
+	{{#TheGame.player.playerHand.isBusted}}
+	<h2>You Busted!</h2>
+	{{/TheGame.player.playerHand.isBusted}}
+	
+	{{#TheGame.outcomeIsPlayerLost}}
+	<h2>You lost your bet!</h2>
+	{{/TheGame.outcomeIsPlayerLost}}
+	
+	{{#TheGame.outcomeIsPlayerWinnerByBlackjack}}
+	<h2>You got a blackjack!</h2>
+	<h2>You win!</h2>
+	{{/TheGame.outcomeIsPlayerWinnerByBlackjack}}
+	
+	{{#TheGame.outcomeIsTie}}
+	<h2>You tied the dealer</h2>
+	<h2>You win your bet back</h2>
+	{{/TheGame.outcomeIsTie}}
+	
+	{{#TheGame.outcomeIsPlayerWinnerNotByBlackjack}}
+	<h2>You won!</h2>
+	{{/TheGame.outcomeIsPlayerWinnerNotByBlackjack}}
+	
+	{{^TheGame.player.outOfMoney}}		
+		<form method="post" action="/bet">
+			$<input 
+			type="number" 
+			name="bet"
+			required
+			autofocus
+			max="{{ TheGame.player.getBankTotal }}"
+			min="1">
+			<button>Place another bet</button>
+		</form>
+	{{/TheGame.player.outOfMoney}}
+	<br>
+	
+	{{#TheGame.player.outOfMoney}}		
+		You ran out of money, please quit the game.
+	{{/TheGame.player.outOfMoney}}
+	
+		<form action="/over">
+			<button>Quit the Game</button>
+		</form>
+		<br>
+		<br>
+	
+	{{#TheGame.player.outOfMoney}}		
+	To reset your bank, click Reset
+		<form method="post" action="/reset">
+			<button>Reset</button>
+		</form>	
+	{{/TheGame.player.outOfMoney}}
+</body>
+</html>

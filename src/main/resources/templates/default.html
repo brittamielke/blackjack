@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Blackjack!</title>
+	</head>
+	<body>
+		<h2>Welcome to the BlackJack Table</h2>
+		<h3>Your current bank is: ${{ TheGame.player.getBankTotal }}</h3>
+		<form method="post" action="/bet">
+			$<input 
+			type="number" 
+			name="bet"
+			required
+			autofocus
+			max="{{ TheGame.player.getBankTotal }}"
+			min="1">
+			<button>Place your bet</button>
+		</form>
+
+		
+	</body>
+</html>
