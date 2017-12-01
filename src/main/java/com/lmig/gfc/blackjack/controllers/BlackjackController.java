@@ -47,7 +47,6 @@ public class BlackjackController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("play");
 		mv.addObject("TheGame", game);
-
 		return mv;
 	}
 
@@ -66,9 +65,7 @@ public class BlackjackController {
 		} else {
 			mv.setViewName("redirect:/over");
 		}
-
 		mv.addObject("TheGame", game);
-
 		return mv;
 	}
 
@@ -77,7 +74,6 @@ public class BlackjackController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("endOfHand");
 		mv.addObject("TheGame", game);
-
 		return mv;
 	}
 
@@ -91,7 +87,6 @@ public class BlackjackController {
 		} else {
 			mv.setViewName("redirect:/over");
 		}
-
 		mv.addObject("TheGame", game);
 		return mv;
 	}
