@@ -115,9 +115,12 @@ public class BlackjackGame {
 		return deck;
 	}
 
+	// used to display the double down button
+	// if the player has only been dealt 2 cards and those 2 are not blackjack.
+	// also, the player must have the money in the bank to cover the double bet
 	public boolean doubleDownAvailable() {
-		return (player.getPlayerHand().getCards().size() == 2 && !player.getPlayerHand().isBlackjack());
-
+		return (player.getPlayerHand().getCards().size() == 2 && !player.getPlayerHand().isBlackjack()
+				&& currentBet <= player.getBankTotal());
 	}
 
 }
